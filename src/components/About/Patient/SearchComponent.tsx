@@ -38,7 +38,10 @@ function SearchComponent({
           <br />
           <Row>
             <Col>
-              <Dropdown isOpen={eventCodesOpen} toggle={toggleEventCode}>
+              <Dropdown
+                isOpen={eventCodesOpen}
+                toggle={toggleEventCode}
+              >
                 <DropdownToggle caret>Search by Event Code</DropdownToggle>
                 <DropdownMenu>
                   {eventCodes.map((element, index) => (
