@@ -9,37 +9,47 @@ import {
   Table,
 } from "reactstrap";
 
-type ViewComponentProps = { patients: any[]; type: string };
+// add custom types to model data
+type ViewComponentProps = {
+  patients: any[];
+  type: string;
+  error: boolean;
+  errorMsg: string;
+};
 
 function ViewComponent({
   patients,
   type,
+  error,
+  errorMsg,
 }: ViewComponentProps): React.ReactElement {
   const [hideView, setHideView] = React.useState(false);
+  // change string literals to enums
   return (
-    // <Jumbotron>
     <Container>
       <Row>
         <Col>
           <h4>{type === "event" ? "Event Code" : "Code Category"}</h4>
         </Col>
         <Col>
-          <Button
-            tag="button"
-            color={!hideView ? "info" : "success"}
-            size="large"
-            style={{ marginLeft: "2em", marginBottom: "2em" }}
-            onClick={(e) => setHideView(!hideView)}
-          >
-            {!hideView ? "Close" : "Open"}
-          </Button>
+          {!error && (
+            <Button
+              tag="button"
+              color={!hideView ? "info" : "success"}
+              size="large"
+              style={{ marginLeft: "2em", marginBottom: "2em" }}
+              onClick={(e) => setHideView(!hideView)}
+            >
+              {!hideView ? "Close" : "Open"}
+            </Button>
+          )}
         </Col>
       </Row>
-
-      {patients.length <= 0 && !hideView && (
+      {error && <Alert color="danger">{errorMsg}</Alert>}
+      {!error && patients.length <= 0 && !hideView && (
         <Alert color="info">Nothing to see here! Select an search above.</Alert>
       )}
-      {patients.length >= 1 && !hideView && (
+      {!error && patients.length >= 1 && !hideView && (
         <Table>
           <thead>
             <tr>
@@ -68,7 +78,6 @@ function ViewComponent({
         </Table>
       )}
     </Container>
-    // </Jumbotron>
   );
 }
 

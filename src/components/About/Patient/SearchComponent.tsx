@@ -10,6 +10,7 @@ import {
   Row,
 } from "reactstrap";
 
+// add custom types to model data
 type SearchComponentProps = {
   eventCodes: string[];
   categories: string[];
