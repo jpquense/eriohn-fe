@@ -11,7 +11,9 @@ function DashboardContainer({
   const [patients, setPatients] = React.useState([]);
   const [eventPatients, setEventPatients] = React.useState([]);
   const [categoryPatients, setCategoryPatients] = React.useState([]);
-  
+  const [errorEvent, setErrorEvent] = React.useState(false);
+  const [errorcategory, setErrorCategory] = React.useState(false);
+
   // set title
   React.useEffect(() => {
     document.title = title;
@@ -41,17 +43,11 @@ function DashboardContainer({
         categories={["A", "B", "C", "D"]}
       />
 
-      <ViewComponent
-        patients={eventPatients}
-        type="event"
-        error={(eventPatients.length < 1 || eventPatients == undefined)}
-        errorMsg={"Error loading event code data"}
-      />
+      <ViewComponent patients={eventPatients} type="event" error={errorEvent} />
       <ViewComponent
         patients={categoryPatients}
         type="category"
-        error={(categoryPatients.length < 1 || categoryPatients == undefined)}
-        errorMsg={"Error loading code category data"}
+        error={errorcategory}
       />
     </React.Fragment>
   );
@@ -61,23 +57,23 @@ function DashboardContainer({
       setEventPatients(
         patients.filter((patient) => patient.event_code === eventCode)
       );
-    } catch (error1) {
-      console.log(error1);
+    } catch (err) {
       // attempt second call if pre-load failed at time of event
       try {
         getAllPatients()
           .then((resp) => {
+            setErrorEvent(false);
             setPatients(resp);
-          })
-          .then(() => {
             setEventPatients(
               patients.filter((patient) => patient.event_code === eventCode)
             );
           })
           .catch((err) => {
+            setErrorEvent(true);
             console.log(err);
           });
       } catch (error2) {
+        setErrorEvent(true);
         console.log(error2);
       }
     }
@@ -92,6 +88,7 @@ function DashboardContainer({
       console.log(error1);
       // attempt second call if pre-load failed at time of event
       try {
+        setErrorCategory(false);
         getAllPatients()
           .then((resp) => {
             setPatients(resp);
@@ -100,9 +97,11 @@ function DashboardContainer({
             );
           })
           .catch((err) => {
+            setErrorCategory(true);
             console.log(err);
           });
       } catch (error2) {
+        setErrorCategory(true);
         console.log(error2);
       }
     }

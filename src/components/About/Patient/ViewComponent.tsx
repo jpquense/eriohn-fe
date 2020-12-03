@@ -1,27 +1,17 @@
 import React from "react";
-import {
-  Alert,
-  Button,
-  Col,
-  Container,
-  Jumbotron,
-  Row,
-  Table,
-} from "reactstrap";
+import { Alert, Button, Col, Container, Row, Table } from "reactstrap";
 
 // add custom types to model data
 type ViewComponentProps = {
   patients: any[];
   type: string;
   error: boolean;
-  errorMsg: string;
 };
 
 function ViewComponent({
   patients,
   type,
   error,
-  errorMsg,
 }: ViewComponentProps): React.ReactElement {
   const [hideView, setHideView] = React.useState(false);
   // change string literals to enums
@@ -45,7 +35,13 @@ function ViewComponent({
           )}
         </Col>
       </Row>
-      {error && <Alert color="danger">{errorMsg}</Alert>}
+      {error && (
+        <Alert color="danger">
+          {type === "event"
+            ? "Error loading event code data"
+            : "Error loading code category data"}
+        </Alert>
+      )}
       {!error && patients.length <= 0 && !hideView && (
         <Alert color="info">Nothing to see here! Select an search above.</Alert>
       )}

@@ -6,7 +6,6 @@ import {
   DropdownItem,
   DropdownMenu,
   DropdownToggle,
-  Jumbotron,
   Row,
 } from "reactstrap";
 
