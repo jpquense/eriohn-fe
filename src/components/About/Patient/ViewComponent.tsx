@@ -25,7 +25,8 @@ function ViewComponent({
           {!error && (
             <Button
               tag="button"
-              color={!hideView ? "info" : "success"}
+              outline
+              color={!hideView ? "warning" : "primary"}
               size="large"
               style={{ marginLeft: "2em", marginBottom: "2em" }}
               onClick={(e) => setHideView(!hideView)}

@@ -53,6 +53,8 @@ function DashboardContainer({
   );
 
   function eventDropdown(eventCode: string) {
+    setErrorEvent(false);
+
     try {
       setEventPatients(
         patients.filter((patient) => patient.event_code === eventCode)
@@ -62,7 +64,6 @@ function DashboardContainer({
       try {
         getAllPatients()
           .then((resp) => {
-            setErrorEvent(false);
             setPatients(resp);
             setEventPatients(
               patients.filter((patient) => patient.event_code === eventCode)
@@ -80,6 +81,8 @@ function DashboardContainer({
   }
 
   function categoryDropdown(category: string) {
+    setErrorCategory(false);
+
     try {
       setCategoryPatients(
         patients.filter((patient) => patient.code_category === category)
@@ -88,7 +91,6 @@ function DashboardContainer({
       console.log(error1);
       // attempt second call if pre-load failed at time of event
       try {
-        setErrorCategory(false);
         getAllPatients()
           .then((resp) => {
             setPatients(resp);
