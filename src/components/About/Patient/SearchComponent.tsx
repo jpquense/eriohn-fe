@@ -30,49 +30,50 @@ function SearchComponent({
   const toggleCategories = () => setCategoriesOpen((prevState) => !prevState);
 
   return (
-    <Jumbotron>
-      <Container>
-        <Row>
-          <Col>
-            <h2>Search Patient Records</h2>
-            <hr />
-            <br />
-            <Row>
-              <Col>
-                <Dropdown isOpen={eventCodesOpen} toggle={toggleEventCode}>
-                  <DropdownToggle caret>Search by Event Code</DropdownToggle>
-                  <DropdownMenu>
-                    {eventCodes.map((element, index) => (
-                      <DropdownItem
-                        onClick={(e) => handleEvent(e.target.innerText)}
-                        key={element + index}
-                      >
-                        {element}
-                      </DropdownItem>
-                    ))}
-                  </DropdownMenu>
-                </Dropdown>
-              </Col>
-              <Col>
-                <Dropdown isOpen={categoriesOpen} toggle={toggleCategories}>
-                  <DropdownToggle caret>Search by Category</DropdownToggle>
-                  <DropdownMenu>
-                    {categories.map((element, index) => (
-                      <DropdownItem
-                        onClick={(e) => handleCategory(e.target.innerText)}
-                        key={element + index}
-                      >
-                        {element}
-                      </DropdownItem>
-                    ))}
-                  </DropdownMenu>
-                </Dropdown>
-              </Col>
-            </Row>
-          </Col>
-        </Row>
-      </Container>
-    </Jumbotron>
+    <Container>
+      <Row>
+        <Col>
+          <h2>Search Patient Records</h2>
+          <hr />
+          <br />
+          <Row>
+            <Col>
+              <Dropdown isOpen={eventCodesOpen} toggle={toggleEventCode}>
+                <DropdownToggle caret>Search by Event Code</DropdownToggle>
+                <DropdownMenu>
+                  {eventCodes.map((element, index) => (
+                    <DropdownItem
+                      onClick={(e) => handleEvent(e.target.innerText)}
+                      key={element + index}
+                    >
+                      {element}
+                    </DropdownItem>
+                  ))}
+                </DropdownMenu>
+              </Dropdown>
+            </Col>
+            <Col>
+              <Dropdown isOpen={categoriesOpen} toggle={toggleCategories}>
+                <DropdownToggle caret>Search by Category</DropdownToggle>
+                <DropdownMenu>
+                  {categories.map((element, index) => (
+                    <DropdownItem
+                      onClick={(e) => handleCategory(e.target.innerText)}
+                      key={element + index}
+                    >
+                      {element}
+                    </DropdownItem>
+                  ))}
+                </DropdownMenu>
+              </Dropdown>
+            </Col>
+          </Row>
+          <br />
+          <hr />
+          <br />
+        </Col>
+      </Row>
+    </Container>
   );
 }
 
