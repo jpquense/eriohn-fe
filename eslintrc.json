@@ -1,0 +1,53 @@
+{
+    "env": {
+      "browser": true,
+      "commonjs": true,
+      "es6": true,
+      "node": true
+    },
+    "plugins": [
+      "react",
+      "react-hooks",
+      "@typescript-eslint"
+    ],
+    "extends": [
+      "eslint:recommended",
+      "plugin:react/recommended",
+      "plugin:prettier/recommended",
+      "prettier/@typescript-eslint",
+      "plugin:@typescript-eslint/eslint-recommended",
+      "plugin:@typescript-eslint/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "sourceType": "module",
+      "ecmaVersion": 2018,
+      "ecmaFeatures": { "jsx": true }
+    },
+    "settings": {
+      "react": {
+        "version": "detect"
+      }
+    },
+    "rules": {
+      "linebreak-style": ["error", "unix"],
+      "no-var": 0,
+      "react/display-name": 0,
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": 0,
+      "@typescript-eslint/no-use-before-define": ["error", {"functions": false, "classes": false}],
+      "@typescript-eslint/camelcase": 0,
+      "@typescript-eslint/no-empty-function": 0
+    },
+    "globals": {
+      "describe": false,
+      "it": false,
+      "expect": false,
+      "beforeEach": false,
+      "afterEach": false,
+      "beforeAll": false,
+      "afterAll": false,
+      "jest": false
+    }
+  }
+  
