@@ -18,7 +18,7 @@ type SearchComponentProps = {
 };
 
 function SearchComponent({
-  eventCodes = ["D456", "L222", "L123", "M222"],
+  eventCodes,
   categories,
   handleEvent,
   handleCategory,

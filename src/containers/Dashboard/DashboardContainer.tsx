@@ -1,10 +1,8 @@
 import React from "react";
 import SearchComponent from "../../components/About/Patient/SearchComponent";
 import ViewComponent from "../../components/About/Patient/ViewComponent";
-
 import { getAllPatients, getTestApi } from "../../apis/resources/patients";
-
-import { Button } from "reactstrap";
+import { Alert, Button } from "reactstrap";
 
 type DashboardContainerProps = { title?: string };
 
@@ -14,7 +12,9 @@ function DashboardContainer({
   const [patients, setPatients] = React.useState([]);
   const [eventPatients, setEventPatients] = React.useState([]);
   const [categoryPatients, setCategoryPatients] = React.useState([]);
-  const [hideView, setHideView] = React.useState(true);
+  const [hideView, setHideView] = React.useState(false);
+  const [error, setError] = React.useState(false);
+  const [errorMsg, setErrorMsg] = React.useState("no issues");
 
   // set title
   React.useEffect(() => {
@@ -24,14 +24,13 @@ function DashboardContainer({
   // retrieve data from api
   // test api connection
   React.useEffect(() => {
-    console.log("Test web Server connectivity --- dashboad call");
     getTestApi().then((resp) => console.log(resp));
   }, []);
+
   // GET /patient/all
   React.useEffect(() => {
     getAllPatients()
       .then((resp) => {
-        console.log("--- all patient response ---");
         setPatients(resp);
       })
       .catch((err) => console.log(err));
@@ -42,11 +41,10 @@ function DashboardContainer({
       <SearchComponent
         handleEvent={eventDropdown}
         handleCategory={categoryDropdown}
-        eventCodes={patients
-          .map((patient) => patient.event_code)
-          .filter(onlyUnique)}
+        eventCodes={["D234", "D456", "L122", "L223", "M222", "M333"]}
         categories={["A", "B", "C", "D"]}
       />
+      {error && <Alert color="danger">{errorMsg}</Alert>}
       <Button
         tag="button"
         color="success"
@@ -56,26 +54,41 @@ function DashboardContainer({
       >
         {!hideView ? "Hide View" : "Display View"}
       </Button>
-      {!hideView && <ViewComponent patients={eventPatients} />}
-      {!hideView && <ViewComponent patients={categoryPatients} />}
+      {!hideView && <ViewComponent patients={eventPatients} type="event" />}
+      {!hideView && (
+        <ViewComponent patients={categoryPatients} type="category" />
+      )}
     </React.Fragment>
   );
 
   function eventDropdown(eventCode: string) {
-    setEventPatients(
-      patients.filter((patient) => patient.event_code === eventCode)
-    );
+    try {
+      setEventPatients(
+        patients.filter((patient) => patient.event_code === eventCode)
+      );
+    } catch (error) {
+      console.log(error);
+      setError(true);
+      setErrorMsg("Patients data was not fetched from API");
+    }
   }
 
   function categoryDropdown(category: string) {
-    setCategoryPatients(
-      patients.filter((patient) => patient.code_category === category)
-    );
+    try {
+      setCategoryPatients(
+        patients.filter((patient) => patient.code_category === category)
+      );
+    } catch (error) {
+      console.log(error);
+      setError(true);
+      setErrorMsg("Patients data was not fetched from API");
+    }
   }
 
-  function onlyUnique(value, index, self) {
-    return self.indexOf(value) === index;
-  }
+  // utility function I may use
+  // function onlyUnique(value, index, self) {
+  //   return self.indexOf(value) === index;
+  // }
 }
 
 export default DashboardContainer;
