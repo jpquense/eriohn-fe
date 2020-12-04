@@ -1,4 +1,23 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+#`eriohn`
+
+# Erion Unleashed
+
+Simple application to demonstate HTTP call and display patient data
+
+Demos 👀️
+
+- Routing
+- Type checking
+- Modern Web Architecture
+- Component / container project structure
+
+## Tech Used
+
+- This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- TypeScript
+- ReactRouter
+- Reactstrap
+- Git
 
 ## Available Scripts
 
@@ -39,6 +58,13 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 
 ## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+You can learn more by following links below:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- [React documentation](https://reactjs.org/).
+- [https://www.typescriptlang.org/](https://)
+- [https://reactrouter.com/web/guides/quick-start](https://reactrouter.com/web/guides/quick-start)
+- [https://github.com/sheetjs/sheetjs](https://github.com/sheetjs/sheetjs)
+- [https://www.npmjs.com/package/read-excel-file](https://www.npmjs.com/package/read-excel-file)
+- [https://reactstrap.github.io/components/buttons/](https://reactstrap.github.io/components/buttons/)
+- [https://reactjs.org/](https://reactjs.org/)
